@@ -15,7 +15,7 @@ describe("Dummy API Integration Tests", () => {
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify(requestBody),
 			});
-			const body = await response.json<{ success: boolean; result: any }>();
+			const body = await response.json<{ success: boolean; result: Record<string, unknown> }>();
 
 			expect(response.status).toBe(200);
 			expect(body.success).toBe(true);

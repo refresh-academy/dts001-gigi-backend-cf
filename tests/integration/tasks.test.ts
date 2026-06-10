@@ -2,7 +2,7 @@ import { SELF } from "cloudflare:test";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 // Helper function to create a task and return its ID
-async function createTask(taskData: any) {
+async function createTask(taskData: Record<string, unknown>) {
 	const response = await SELF.fetch(`http://local.test/tasks`, {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },
@@ -26,7 +26,7 @@ describe("Task API Integration Tests", () => {
 	describe("GET /tasks", () => {
 		it("should get an empty list of tasks", async () => {
 			const response = await SELF.fetch(`http://local.test/tasks`);
-			const body = await response.json<{ success: boolean; result: any[] }>();
+			const body = await response.json<{ success: boolean; result: Record<string, unknown>[] }>();
 
 			expect(response.status).toBe(200);
 			expect(body.success).toBe(true);
@@ -43,7 +43,7 @@ describe("Task API Integration Tests", () => {
 			});
 
 			const response = await SELF.fetch(`http://local.test/tasks`);
-			const body = await response.json<{ success: boolean; result: any[] }>();
+			const body = await response.json<{ success: boolean; result: Record<string, unknown>[] }>();
 
 			expect(response.status).toBe(200);
 			expect(body.success).toBe(true);
@@ -73,7 +73,7 @@ describe("Task API Integration Tests", () => {
 				body: JSON.stringify(taskData),
 			});
 
-			const body = await response.json<{ success: boolean; result: any }>();
+			const body = await response.json<{ success: boolean; result: Record<string, unknown> }>();
 
 			expect(response.status).toBe(201);
 			expect(body.success).toBe(true);
@@ -116,7 +116,7 @@ describe("Task API Integration Tests", () => {
 			const taskId = await createTask(taskData);
 
 			const response = await SELF.fetch(`http://local.test/tasks/${taskId}`);
-			const body = await response.json<{ success: boolean; result: any }>();
+			const body = await response.json<{ success: boolean; result: Record<string, unknown> }>();
 
 			expect(response.status).toBe(200);
 			expect(body.success).toBe(true);
@@ -166,7 +166,7 @@ describe("Task API Integration Tests", () => {
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify(updatedData),
 			});
-			const body = await response.json<{ success: boolean; result: any }>();
+			const body = await response.json<{ success: boolean; result: Record<string, unknown> }>();
 
 			expect(response.status).toBe(200);
 			expect(body.success).toBe(true);
@@ -238,7 +238,7 @@ describe("Task API Integration Tests", () => {
 			);
 			const deleteBody = await deleteResponse.json<{
 				success: boolean;
-				result: any;
+				result: Record<string, unknown>;
 			}>();
 
 			expect(deleteResponse.status).toBe(200);

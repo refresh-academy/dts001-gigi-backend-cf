@@ -6,5 +6,8 @@ export type Env = AppEnv & {
 };
 
 declare module "cloudflare:test" {
+	// Declaration merging with the module's own ProvidedEnv requires an interface,
+	// even though it adds no members of its own.
+	// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 	interface ProvidedEnv extends Env {}
 }
