@@ -1,0 +1,16 @@
+{
+	"compatibility_date": "2025-10-08",
+	"main": "src/index.ts",
+	"name": "dts001-gigi-backend-cf",
+	"upload_source_maps": true,
+	"observability": {
+		"enabled": true
+	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "openapi-backend-db",
+			"database_id": "2eaf0405-053a-44d2-a621-41b1703dfc57"
+		}
+	]
+}
